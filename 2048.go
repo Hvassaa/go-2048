@@ -11,13 +11,30 @@ import (
 )
 
 func main() {
-	rand.Seed(time.Now().UTC().UnixNano())
+	// the dimensions for the grid / map
 	height := 6
 	width := 4
+
+	// create the grid
 	var grid [][]int = createGrid(height, width)
 
+	// the game loop
+	gameLoop(grid)
+}
+
+// the main game loop which handles input and display
+func gameLoop(grid [][]int) {
+	// get dimensions
+	height := len(grid)
+	width := len(grid[0])
+
+	// seed random with the current time
+	rand.Seed(time.Now().UTC().UnixNano())
+
+	// create a reader
 	reader := bufio.NewReader(os.Stdin)
 	for {
+		// randomly add some new 1's every round
 		for i := 0; i < width; i++ {
 			y := rand.Intn(height)
 			x := rand.Intn(width)
@@ -26,13 +43,18 @@ func main() {
 			}
 		}
 
+		// clear the screen
 		c := exec.Command("clear")
 		c.Stdout = os.Stdout
 		c.Run()
+
+		// show the map
 		printGrid(grid)
+
+		// get movement from stdin and move accordinlgy
 		fmt.Print("Move: ")
 		move, _ := reader.ReadString('\n')
-
+		// use vim keybinding for movement
 		switch move {
 		case "j\n":
 			moveVertical(grid, false)
@@ -46,6 +68,7 @@ func main() {
 	}
 }
 
+// slightly overengineered method to move both up and down
 func moveVertical(grid [][]int, left bool) {
 	var start, stop, move, reverseStop, reverseMove int
 	var compare greaterOrLesserTest
@@ -93,6 +116,7 @@ func moveVertical(grid [][]int, left bool) {
 	}
 }
 
+// see moveVertical
 func moveHorizontal(grid [][]int, left bool) {
 	var start, stop, move, reverseStop, reverseMove int
 	var compare greaterOrLesserTest
@@ -140,6 +164,7 @@ func moveHorizontal(grid [][]int, left bool) {
 	}
 }
 
+// a type for use in the move methods, for generic comparations
 type greaterOrLesserTest func(a, b int) bool
 
 // for simply creating a grid, n times n in dimensions

@@ -69,12 +69,18 @@ func gameLoop(grid [][]int) {
 }
 
 // slightly overengineered method to move both up and down
-func moveVertical(grid [][]int, left bool) {
+func moveVertical(grid [][]int, up bool) {
+	// generic values to bet set depending on direction
 	var start, stop, move, reverseStop, reverseMove int
+
+	// generic function to compare two values
+	// for use in the boolean test in the for-loops
 	var compare greaterOrLesserTest
 	height := len(grid)
 	width := len(grid[0])
-	if left {
+
+	// set values depending movement direction
+	if up {
 		start = 0
 		stop = height
 		reverseStop = start
@@ -110,7 +116,6 @@ func moveVertical(grid [][]int, left bool) {
 				} else {
 					break
 				}
-
 			}
 		}
 	}
@@ -158,7 +163,6 @@ func moveHorizontal(grid [][]int, left bool) {
 				} else {
 					break
 				}
-
 			}
 		}
 	}

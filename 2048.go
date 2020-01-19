@@ -12,14 +12,15 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	dimension := 4
-	var grid [][]int = createGrid(dimension)
+	height := 6
+	width := 4
+	var grid [][]int = createGrid(height, width)
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
-		for i := 0; i < dimension; i++ {
-			y := rand.Intn(dimension)
-			x := rand.Intn(dimension)
+		for i := 0; i < width; i++ {
+			y := rand.Intn(height)
+			x := rand.Intn(width)
 			if grid[y][x] == 0 {
 				grid[y][x] = 1
 			}
@@ -48,17 +49,18 @@ func main() {
 func moveVertical(grid [][]int, left bool) {
 	var start, stop, move, reverseStop, reverseMove int
 	var compare greaterOrLesserTest
-	dimension := len(grid)
+	height := len(grid)
+	width := len(grid[0])
 	if left {
 		start = 0
-		stop = dimension
+		stop = height
 		reverseStop = start
 		move = 1
 		compare = func(a, b int) bool {
 			return a < b
 		}
 	} else {
-		start = dimension - 1
+		start = height - 1
 		stop = -1
 		reverseStop = start
 		move = -1
@@ -68,7 +70,7 @@ func moveVertical(grid [][]int, left bool) {
 	}
 	reverseMove = move * (-1)
 
-	for i := 0; i < dimension; i++ {
+	for i := 0; i < width; i++ {
 		for j := start; compare(j, stop); j = j + move {
 			// the currently examined cell's value
 			current := grid[j][i]
@@ -94,17 +96,18 @@ func moveVertical(grid [][]int, left bool) {
 func moveHorizontal(grid [][]int, left bool) {
 	var start, stop, move, reverseStop, reverseMove int
 	var compare greaterOrLesserTest
-	dimension := len(grid)
+	height := len(grid)
+	width := len(grid[0])
 	if left {
 		start = 0
-		stop = dimension
+		stop = width
 		reverseStop = start
 		move = 1
 		compare = func(a, b int) bool {
 			return a < b
 		}
 	} else {
-		start = dimension - 1
+		start = width - 1
 		stop = -1
 		reverseStop = start
 		move = -1
@@ -114,7 +117,7 @@ func moveHorizontal(grid [][]int, left bool) {
 	}
 	reverseMove = move * (-1)
 
-	for i := 0; i < dimension; i++ {
+	for i := 0; i < height; i++ {
 		for j := start; compare(j, stop); j = j + move {
 			// the currently examined cell's value
 			current := grid[i][j]
@@ -139,40 +142,11 @@ func moveHorizontal(grid [][]int, left bool) {
 
 type greaterOrLesserTest func(a, b int) bool
 
-func moveLeft(grid [][]int) {
-	dimension := len(grid)
-	for i := 0; i < dimension; i++ {
-		for j := 1; j < dimension; j++ {
-			// the currently examined cell's value
-			current := grid[i][j]
-			// boolean indicating if cells have been merged
-			// since each cell can only merge once per move
-			// (i.e. 1 | 1 | 1 | 1 <<becomes<< 2 | 2 | 0 | 0)
-			isMerged := false
-
-			for reverse := j; reverse > 0; reverse-- {
-				if grid[i][reverse-1] == 0 {
-					grid[i][reverse-1] = current
-					grid[i][reverse] = 0
-				} else if grid[i][reverse-1] == current && !isMerged {
-					current = current * 2
-					grid[i][reverse-1] = current
-					grid[i][reverse] = 0
-					isMerged = true
-				} else {
-					break
-				}
-
-			}
-		}
-	}
-}
-
 // for simply creating a grid, n times n in dimensions
-func createGrid(n int) [][]int {
-	grid := make([][]int, n)
-	for i := 0; i < n; i++ {
-		grid[i] = make([]int, n)
+func createGrid(height, width int) [][]int {
+	grid := make([][]int, height)
+	for i := 0; i < height; i++ {
+		grid[i] = make([]int, width)
 	}
 	return grid
 }
@@ -180,15 +154,16 @@ func createGrid(n int) [][]int {
 // print grid to stdout
 func printGrid(grid [][]int) {
 	// save dimension (height/width) of the grid
-	dimension := len(grid)
+	height := len(grid)
+	width := len(grid[0])
 
 	// make the top line
-	makeHorizontalSeperator(dimension)
+	makeHorizontalSeperator(width)
 
 	// loop through the whole grid-matrix
-	for y := 0; y < dimension; y++ {
+	for y := 0; y < height; y++ {
 		fmt.Print("|")
-		for x := 0; x < dimension; x++ {
+		for x := 0; x < width; x++ {
 			// get the value of the current cell
 			value := grid[y][x]
 			// get the number of digits in the value
@@ -207,14 +182,14 @@ func printGrid(grid [][]int) {
 		// make a newline
 		fmt.Println()
 		// make a seperator between the lines
-		makeHorizontalSeperator(dimension)
+		makeHorizontalSeperator(width)
 	}
 }
 
 // make the horizontal line
-func makeHorizontalSeperator(dimension int) {
+func makeHorizontalSeperator(width int) {
 	fmt.Print("+")
-	for i := 0; i < dimension; i++ {
+	for i := 0; i < width; i++ {
 		fmt.Print("-----------+")
 	}
 	fmt.Println()

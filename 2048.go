@@ -13,9 +13,11 @@ func main() {
 	var grid [][]int = createGrid(height, width)
 	createNewTiles(grid)
 
-	var displayerController DisplayerControllerInterface = cliDisplayer{}
+	//var displayerController DisplayerControllerInterface = cliDisplayer{}
+	var displayerController DisplayerControllerInterface = gtkDisplayerController{}
 
 	// the game loop
+	displayerController.init()
 	displayerController.startGameLoop(grid)
 }
 

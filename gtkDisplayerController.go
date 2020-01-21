@@ -31,18 +31,25 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 		log.Fatal("Unable to create grid layout:", err)
 	}
 
+	displayGrid(grid, *gtkGrid)
+
 	// get dimensions
 	height := len(grid)
-	width := len(grid[0])
+	middleCell := int(len(grid[0]) / 2)
 
-	// populate grid container with the grids values
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
-			current := grid[y][x]
-			label, _ := gtk.LabelNew(strconv.Itoa(current))
-			gtkGrid.Attach(label, x, y, 1, 1)
-		}
-	}
+	// left
+	leftButton, _ := gtk.ButtonNewWithLabel("Left")
+	leftButton.Connect("", func() {})
+	gtkGrid.Attach(leftButton, middleCell-1, height+1, 1, 1)
+	//right
+	rightButton, _ := gtk.ButtonNewWithLabel("Right")
+	gtkGrid.Attach(rightButton, middleCell+1, height+1, 1, 1)
+	//up
+	upButton, _ := gtk.ButtonNewWithLabel("Up")
+	gtkGrid.Attach(upButton, middleCell, height, 1, 1)
+	//up
+	downButton, _ := gtk.ButtonNewWithLabel("down")
+	gtkGrid.Attach(downButton, middleCell, height+2, 1, 1)
 
 	gtkGrid.SetColumnHomogeneous(true)
 	gtkGrid.SetRowHomogeneous(true)
@@ -59,4 +66,19 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	// Begin executing the GTK main loop.  This blocks until
 	// gtk.MainQuit() is run.
 	gtk.Main()
+}
+
+func displayGrid(grid [][]int, gtkGrid gtk.Grid) {
+	// get dimensions
+	height := len(grid)
+	width := len(grid[0])
+
+	// populate grid container with the grids values
+	for y := 0; y < height; y++ {
+		for x := 0; x < width; x++ {
+			current := grid[y][x]
+			label, _ := gtk.LabelNew(strconv.Itoa(current))
+			gtkGrid.Attach(label, x, y, 1, 1)
+		}
+	}
 }

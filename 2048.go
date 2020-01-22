@@ -6,7 +6,7 @@ import (
 
 func main() {
 	// the dimensions for the grid / map
-	height := 6
+	height := 4
 	width := 4
 
 	// create the grid

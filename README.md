@@ -27,7 +27,7 @@ To run the build binary, simply run it by
 
 Or without building 
 
-   go run 2048.go cliDisplayer.go gtkDisplayerController.go
+    go run 2048.go cliDisplayer.go gtkDisplayerController.go
 
 The program can optionally take either 1 or 3 parameters. The first parameter is how to display the game, either in STDOUT or as a GTK3 window (standard is gtk):
 

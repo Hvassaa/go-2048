@@ -3,6 +3,7 @@ package main
 import (
 	"math/rand"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -12,7 +13,9 @@ func main() {
 	var width int
 	// the selected display strat
 	var displayerController DisplayerControllerInterface
-	if len(args) > 0 {
+
+	numOfArgs := len(args)
+	if numOfArgs > 0 {
 		displayStrat := args[0]
 		switch displayStrat {
 		case "gtk":
@@ -20,14 +23,25 @@ func main() {
 		case "cli":
 			displayerController = cliDisplayer{}
 		default:
-			panic("gttegreg")
+			panic("Unknown display-controller ('gtk' or 'cli')")
 		}
-		height = 4
-		width = 4
 	} else {
 		height = 4
 		width = 4
 		displayerController = gtkDisplayerController{}
+	}
+	if numOfArgs > 1 {
+		if numOfArgs == 3 {
+			x, _ := strconv.Atoi(args[1])
+			y, _ := strconv.Atoi(args[2])
+			height = y
+			width = x
+		} else {
+			panic("wrong number of arguments. Should be\n'go-2048 display-controller height width\nor\n'go-2048 display-controller'")
+		}
+	} else {
+		height = 4
+		width = 4
 	}
 
 	// create the grid

@@ -62,7 +62,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	})
 	gtkGrid.Attach(upButton, middleCell, height, 1, 1)
 	//up
-	downButton, _ := gtk.ButtonNewWithLabel("down")
+	downButton, _ := gtk.ButtonNewWithLabel("Down")
 	downButton.Connect("clicked", func() {
 		moveVertical(grid, false)
 		displayGrid(grid, *gtkGrid)

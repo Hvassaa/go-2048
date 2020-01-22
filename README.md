@@ -2,7 +2,7 @@
 
 A small clone of the game 2048. I made this mostly to try out the Go programming language and the GTK toolkit.
 
-Go-2048's behaviour might behave a bit different, since it has been a while since I played the original and I did not look the original source code.
+Go-2048 might behave a bit different to the orignial, since it has been a while since I played the original and I did not look its' source code.
 
 ## Building
 

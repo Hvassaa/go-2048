@@ -39,16 +39,35 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 
 	// left
 	leftButton, _ := gtk.ButtonNewWithLabel("Left")
-	leftButton.Connect("", func() {})
+	leftButton.Connect("clicked", func() {
+		moveHorizontal(grid, true)
+		displayGrid(grid, *gtkGrid)
+		win.ShowAll()
+	})
 	gtkGrid.Attach(leftButton, middleCell-1, height+1, 1, 1)
 	//right
 	rightButton, _ := gtk.ButtonNewWithLabel("Right")
+	rightButton.Connect("clicked", func() {
+		moveHorizontal(grid, false)
+		displayGrid(grid, *gtkGrid)
+		win.ShowAll()
+	})
 	gtkGrid.Attach(rightButton, middleCell+1, height+1, 1, 1)
 	//up
 	upButton, _ := gtk.ButtonNewWithLabel("Up")
+	upButton.Connect("clicked", func() {
+		moveVertical(grid, true)
+		displayGrid(grid, *gtkGrid)
+		win.ShowAll()
+	})
 	gtkGrid.Attach(upButton, middleCell, height, 1, 1)
 	//up
 	downButton, _ := gtk.ButtonNewWithLabel("down")
+	downButton.Connect("clicked", func() {
+		moveVertical(grid, false)
+		displayGrid(grid, *gtkGrid)
+		win.ShowAll()
+	})
 	gtkGrid.Attach(downButton, middleCell, height+2, 1, 1)
 
 	gtkGrid.SetColumnHomogeneous(true)
@@ -78,6 +97,8 @@ func displayGrid(grid [][]int, gtkGrid gtk.Grid) {
 		for x := 0; x < width; x++ {
 			current := grid[y][x]
 			label, _ := gtk.LabelNew(strconv.Itoa(current))
+			child, _ := gtkGrid.GetChildAt(x, y)
+			child.Destroy()
 			gtkGrid.Attach(label, x, y, 1, 1)
 		}
 	}

@@ -31,7 +31,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 		log.Fatal("Unable to create grid layout:", err)
 	}
 
-	displayGrid(grid, *gtkGrid)
+	gtkDisplayGrid(grid, *gtkGrid)
 
 	// get dimensions
 	height := len(grid)
@@ -41,7 +41,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	leftButton, _ := gtk.ButtonNewWithLabel("Left")
 	leftButton.Connect("clicked", func() {
 		moveHorizontal(grid, true)
-		displayGrid(grid, *gtkGrid)
+		gtkDisplayGrid(grid, *gtkGrid)
 		win.ShowAll()
 	})
 	gtkGrid.Attach(leftButton, middleCell-1, height+1, 1, 1)
@@ -49,7 +49,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	rightButton, _ := gtk.ButtonNewWithLabel("Right")
 	rightButton.Connect("clicked", func() {
 		moveHorizontal(grid, false)
-		displayGrid(grid, *gtkGrid)
+		gtkDisplayGrid(grid, *gtkGrid)
 		win.ShowAll()
 	})
 	gtkGrid.Attach(rightButton, middleCell+1, height+1, 1, 1)
@@ -57,7 +57,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	upButton, _ := gtk.ButtonNewWithLabel("Up")
 	upButton.Connect("clicked", func() {
 		moveVertical(grid, true)
-		displayGrid(grid, *gtkGrid)
+		gtkDisplayGrid(grid, *gtkGrid)
 		win.ShowAll()
 	})
 	gtkGrid.Attach(upButton, middleCell, height, 1, 1)
@@ -65,7 +65,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	downButton, _ := gtk.ButtonNewWithLabel("Down")
 	downButton.Connect("clicked", func() {
 		moveVertical(grid, false)
-		displayGrid(grid, *gtkGrid)
+		gtkDisplayGrid(grid, *gtkGrid)
 		win.ShowAll()
 	})
 	gtkGrid.Attach(downButton, middleCell, height+2, 1, 1)
@@ -87,7 +87,7 @@ func (g gtkDisplayerController) startGameLoop(grid [][]int) {
 	gtk.Main()
 }
 
-func displayGrid(grid [][]int, gtkGrid gtk.Grid) {
+func gtkDisplayGrid(grid [][]int, gtkGrid gtk.Grid) {
 	// get dimensions
 	height := len(grid)
 	width := len(grid[0])

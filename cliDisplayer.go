@@ -31,7 +31,7 @@ func (c cliDisplayer) startGameLoop(grid [][]int) {
 		c.Run()
 
 		// show the map
-		displayGrid(grid)
+		cliDisplayGrid(grid)
 
 		// get movement from stdin and move accordinlgy
 		fmt.Print("Move: ")
@@ -51,7 +51,7 @@ func (c cliDisplayer) startGameLoop(grid [][]int) {
 }
 
 // print grid to stdout
-func displayGrid(grid [][]int) {
+func cliDisplayGrid(grid [][]int) {
 	// save dimension (height/width) of the grid
 	height := len(grid)
 	width := len(grid[0])

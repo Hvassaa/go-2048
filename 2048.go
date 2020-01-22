@@ -2,19 +2,39 @@ package main
 
 import (
 	"math/rand"
+	"os"
 )
 
 func main() {
+	args := os.Args[1:]
 	// the dimensions for the grid / map
-	height := 4
-	width := 4
+	var height int
+	var width int
+	// the selected display strat
+	var displayerController DisplayerControllerInterface
+	if len(args) > 0 {
+		displayStrat := args[0]
+		switch displayStrat {
+		case "gtk":
+			displayerController = gtkDisplayerController{}
+		case "cli":
+			displayerController = cliDisplayer{}
+		default:
+			panic("gttegreg")
+		}
+		height = 4
+		width = 4
+	} else {
+		height = 4
+		width = 4
+		displayerController = gtkDisplayerController{}
+	}
 
 	// create the grid
 	var grid [][]int = createGrid(height, width)
 	createNewTiles(grid)
 
 	//var displayerController DisplayerControllerInterface = cliDisplayer{}
-	var displayerController DisplayerControllerInterface = gtkDisplayerController{}
 
 	// the game loop
 	displayerController.init()

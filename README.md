@@ -2,6 +2,8 @@
 
 A small clone of the game 2048. I made this mostly to try out the Go programming language and the GTK toolkit.
 
+Go-2048's behaviour might behave a bit different, since it has been a while since I played the original and I did not look the original source code.
+
 ## Building
 
 ### Prerequisite
@@ -38,4 +40,4 @@ You can also add the wanted height and width of the map (standard is 4 by 4):
 
 ## Acknowledgement
 
-The original version of 2048 can be found [here](https://github.com/gabrielecirulli/2048). Go-2048's behaviour might behave a little different, since it has been a while since I played the original and I did not look the source code.
+The original version of 2048 can be found [here](https://github.com/gabrielecirulli/2048). 

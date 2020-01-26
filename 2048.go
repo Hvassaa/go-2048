@@ -26,8 +26,8 @@ func main() {
 			panic("Unknown display-controller ('gtk' or 'cli')")
 		}
 	} else {
-		height = 4
-		width = 4
+		height = 5
+		width = 5
 		displayerController = gtkDisplayerController{}
 	}
 	if numOfArgs > 1 {

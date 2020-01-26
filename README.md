@@ -34,9 +34,9 @@ The program can optionally take either 1 or 3 parameters. The first parameter is
     ./go-2048 cli
     ./go-2048 gtk
 
-You can also add the wanted height and width of the map (standard is 4 by 4):
+You can also add the wanted height and width of the map (standard is 5 by 5):
 
-    ./go-2048 gtk 4 4
+    ./go-2048 gtk 5 5
 
 ## Acknowledgement
 

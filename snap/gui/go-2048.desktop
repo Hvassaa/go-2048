@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=go-2048
+Exec=go-2048
+Icon=${SNAP}/meta/gui/go-2048.png
+Comment=Clone of 2048 written in Go
+Type=Application
+Categories=Game;
+StartupNotify=true

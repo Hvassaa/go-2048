@@ -1,0 +1,26 @@
+name: go-2048
+base: core18
+version: 'git'
+summary: Clone of 2048 written in Go
+description: test
+license: "GPL-3.0"
+
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  go-2048:
+    command: bin/go-2048.git
+    extensions: [gnome-3-28]
+    plugs: [desktop, desktop-legacy, unity7, x11, wayland]
+
+parts:
+  go-2048:
+    source: https://github.com/Hvassaa/go-2048.git
+    plugin: go
+    build-packages:
+      - golang-github-gotk3-gotk3-dev

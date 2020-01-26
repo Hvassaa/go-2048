@@ -1,8 +1,12 @@
-# Go-2048
+<h1 align="center">
+  <img src="snap/gui/go-2048.png" alt="go-2048">
+  <br />
+  go-2048
+</h1>
 
 A small clone of the game 2048. I made this mostly to try out the Go programming language and the GTK toolkit.
 
-Go-2048 might behave a bit different to the orignial, since it has been a while since I played the original and I did not look its' source code.
+Go-2048 might behave a bit different to the orignial, since it has been a while since I played the original and I did not look at its' source code.
 
 ## Building
 
